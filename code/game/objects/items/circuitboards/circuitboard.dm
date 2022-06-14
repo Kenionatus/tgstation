@@ -32,7 +32,7 @@
 			part.moveToNullspace(loc)
 			qdel(part)
 
-	// List of components always contains the circuit board used to build it.
+	/// List of components always contains the circuit board used to build it.
 	machine.component_parts = list(src)
 	forceMove(machine)
 
@@ -62,14 +62,25 @@ micro-manipulator, console screen, beaker, Microlaser, matter bin, power cells.
 */
 
 /obj/item/circuitboard/machine
-	var/needs_anchored = TRUE // Whether this machine must be anchored to be constructed.
-	var/list/req_components = new() // Components required by the machine.
-							        // Example: list(/obj/item/stock_parts/matter_bin = 5)
+	/// Whether this machine must be anchored to be constructed.
+	var/needs_anchored = TRUE
 
-	var/list/def_components // Default replacements for req_components, to be used in apply_default_parts instead of req_components types
-							// Example: list(/obj/item/stock_parts/matter_bin = /obj/item/stock_parts/matter_bin/super)
+	/**
+	 * Components required by the machine.
+	 *
+	 * Example: list(/obj/item/stock_parts/matter_bin = 5)
+	 */
 
-// Applies the default parts defined by the circuit board when the machine is created
+	var/list/req_components = new()
+
+	/**
+	 * Default replacements for req_components, to be used in apply_default_parts instead of req_components types
+	 *
+	 * Example: list(/obj/item/stock_parts/matter_bin = /obj/item/stock_parts/matter_bin/super)
+	 */
+	var/list/def_components
+
+/// Applies the default parts defined by the circuit board when the machine is created
 /obj/item/circuitboard/machine/apply_default_parts(obj/machinery/machine)
 	if(!req_components)
 		return
